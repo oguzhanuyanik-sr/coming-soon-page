@@ -1,10 +1,7 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 
-type Props = {};
-
-const Header = (props: Props) => {
+const Header = () => {
   return (
     <header className='w-full'>
       <section className='w-full flex justify-center mt-20 mb-8'>

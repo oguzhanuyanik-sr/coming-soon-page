@@ -1,10 +1,8 @@
 import React from 'react';
-import { socialLinks } from './constants';
+import { socialLinks } from '@/utils/constants';
 import Link from 'next/link';
 
-type Props = {};
-
-const Footer = (props: Props) => {
+const Footer = () => {
   return (
     <footer className='mt-[72px]'>
       <section className='flex gap-6 justify-center'>

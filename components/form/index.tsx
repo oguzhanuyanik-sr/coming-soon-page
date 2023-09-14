@@ -1,12 +1,12 @@
 'use client';
+import React from 'react';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
-import React from 'react';
-import ErrorMessage from '../common/error-message';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import ErrorMessage from '../common/error-message';
 
-type FormValues = {
+export type FormValueTypes = {
   email: string;
 };
 
@@ -17,22 +17,24 @@ const schema = yup.object({
     .required('Email is required'),
 });
 
-type Props = {};
+const defaultValues = {
+  email: '',
+};
 
-const Form = (props: Props) => {
-  const form = useForm<FormValues>({
-    defaultValues: {
-      email: '',
-    },
+const Form = () => {
+  const form = useForm<FormValueTypes>({
+    defaultValues,
     resolver: yupResolver(schema),
     mode: 'onTouched',
   });
 
-  const { register, handleSubmit, formState } = form;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = form;
 
-  const { errors } = formState;
-
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = (data: FormValueTypes) => {
     alert(`Thanks for subscribing! ❤️\n\n${data.email} ✔️`);
   };
 
@@ -50,7 +52,7 @@ const Form = (props: Props) => {
             placeholder='Your email address...'
             className='w-full mt-8 outline-none border border-blue-100 rounded-[28px] py-[14px] pl-8 placeholder:text-blue-100 md:m-0'
           />
-          <ErrorMessage message={errors.email?.message} />
+          <ErrorMessage message={errors.email?.message as string} />
         </div>
         <button
           type='submit'
